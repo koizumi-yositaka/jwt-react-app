@@ -4,7 +4,6 @@ import { User } from '../types/type'
 import { InputText } from './common/InputText'
 import { Button } from './common/Button'
 import { useUserForm } from '../hooks/useUserForm'
-import { useState } from 'react'
 import { addUser, isExistUserByEmail } from '../service/user/api'
 
 
