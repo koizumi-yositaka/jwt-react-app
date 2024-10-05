@@ -1,0 +1,52 @@
+name: deploy
+on: 
+  push:
+    branches:
+      - "*"
+permissions:
+  contents: read
+  packages: write
+env:
+  REGISTRY: ghcr.io
+  MANIFEST_REPO: koizumi-yositaka/jwt-react-app
+  MANIFEST_FILE_PATH: manifest/express-deployment.yml
+  IMAGE_NAME: koizumi-yositaka/jwt-react-app
+jobs:
+  build-and-push-image:
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      issues: write
+      packages: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
+      pages: write  
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  #githubが提供するcheckout
+
+      - name: Docker met
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
+
+      - name: Log in to Git Hub Container Resistory # GitHUb Crへのログイン
+        uses: docker/login-action@v3
+        with:
+          registry: ${{env.REGISTRY}}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with: 
+          context: ./app
+          push: true
+          tags: ${{env.REGISTRY}}/${{env.IMAGE_NAME}}:latest
+          labels: ${{steps.meta.outputs.labels}} 
