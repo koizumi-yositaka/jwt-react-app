@@ -8,7 +8,7 @@ type ResultGet={
     rows:User[]
 }
 export const isExistUserByEmail=async(email:string)=>{
-    console.log("baseutl",BASE_URL)
+    console.log("baseutl",import.meta.env)
     //return (await axiosInstance.get<User[]>(`users/${email}`)).data
     return (await axiosInstance.get<ResultGet>(`users?email=${email}`)).data.rows.length > 0
 
