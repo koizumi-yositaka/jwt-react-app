@@ -1,5 +1,10 @@
+import { LoginForm } from "./LoginForm"
+
 export const SignUp = () => {
   return (
-    <div>SignUp</div>
+      <div>
+        <LoginForm mode="signup"></LoginForm>
+
+    </div>
   )
 }

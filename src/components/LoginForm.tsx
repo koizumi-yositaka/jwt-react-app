@@ -4,8 +4,27 @@ import { User } from '../types/type'
 import { InputText } from './common/InputText'
 import { Button } from './common/Button'
 import { useUserForm } from '../hooks/useUserForm'
-import { addUser, isExistUserByEmail } from '../service/user/api'
+import { addUser, loginAPi,isExistUserByEmail } from '../service/user/api'
+import { Link, useNavigate } from '@tanstack/react-router'
+import useAuth from '../hooks/useAuth'
+import axios from 'axios'
+import styled from 'styled-components'
 
+const LoginFormWapper=styled.div`
+  padding-left: 30px;
+  padding-right: 30px;
+`
+
+const InputWrapper = styled.div`
+`
+const LoginTitle = styled.div`
+  background-color: #1B2538;
+  color: white;
+  height:60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+`
 
 
 type LoginFormMode=
@@ -14,6 +33,8 @@ type LoginFormMode=
 
 
 export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
+  const navigate = useNavigate()
+  const {login}= useAuth()
   const {
       register,
       handleSubmit,
@@ -23,36 +44,70 @@ export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
   } = useUserForm()
   const handleChangeUser:SubmitHandler<User>=async (data)=>{
     console.log("data更新",data)
-    const isExistEmail =await isExistUserByEmail(data.email)
-    if(isExistEmail){
-      setError("email",{message:"sdasdasdasdadas"})
+    
+    if(mode === "login"){ 
+
+
+      let loginResult; 
+
+      try{
+        loginResult = await loginAPi(data.email,data.password)
+        if(loginResult.loginResult){
+          login() 
+          navigate({
+            to:"/"
+          })
+        }else{
+          console.log(loginResult.message)
+        }
+      }catch(error){
+        if(axios.isAxiosError(error)){
+          setError("password",{message:"パスワードが違う"})
+        }else{
+          console.error(error)
+        }
+      }
+
+      
     }else{
-      addUser(data.email,data.password)
+      const isExistEmail =await isExistUserByEmail(data.email)
+      if(isExistEmail){
+        setError("email",{message:"sdasdasdasdadas"})
+      }else{
+        await addUser(data.email,data.password)
+        login()
+        navigate({
+          to:"/"
+        })
+      }
     }
+
   }
   
 
 
 
   return (
-    <div>
-      <div>{mode==="login"?"LoginForm":"adasas"}</div>
+    <LoginFormWapper>
+      <LoginTitle>{mode==="login"?"ログイン":"サインアップ"}</LoginTitle>
       <form onSubmit={handleSubmit(handleChangeUser)}>
-        <div>
+        <InputWrapper>
           <InputText label={"メールアドレス"} error={errors.email ?errors.email.message:""} register={register("email")}/> 
-        </div>
-        <div>
+        </InputWrapper>
+        <InputWrapper>
           <InputText label={"パスワード"} error={errors.password ?errors.password.message:""} register={register("password")}/> 
-        </div>
-        <div>
+        </InputWrapper>
+        <InputWrapper>
           
-          <Button type="submit" disabled={!isValid} >登録</Button>  
-        </div>
-        
+          <Button type="submit" data-level="first"  disabled={!isValid} >{mode === "login"?"ログイン":"サインアップ"}</Button>  
+        </InputWrapper>
+        {
+          mode === "login"?<Link to="/signup"></Link>:<Link to="/login">ログイン</Link>
+        }
       </form>
 
 
-    </div>
+    </LoginFormWapper>
    
   )
 }
