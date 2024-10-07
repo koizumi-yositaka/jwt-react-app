@@ -9,6 +9,7 @@ import { Link, useNavigate } from '@tanstack/react-router'
 import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import styled from 'styled-components'
+import useToast from '../hooks/useToast'
 
 const LoginFormWapper=styled.div`
   padding-left: 30px;
@@ -35,6 +36,7 @@ type LoginFormMode=
 export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
   const navigate = useNavigate()
   const {login}= useAuth()
+  const {showToast} =useToast()
   const {
       register,
       handleSubmit,
@@ -54,6 +56,7 @@ export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
         loginResult = await loginAPi(data.email,data.password)
         if(loginResult.loginResult){
           login() 
+          showToast("ログインしました")
           navigate({
             to:"/"
           })
@@ -62,7 +65,7 @@ export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
         }
       }catch(error){
         if(axios.isAxiosError(error)){
-          setError("password",{message:"パスワードが違う"})
+          setError("password",{message:"パスワードが違います"})
         }else{
           console.error(error)
         }
@@ -72,10 +75,11 @@ export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
     }else{
       const isExistEmail =await isExistUserByEmail(data.email)
       if(isExistEmail){
-        setError("email",{message:"sdasdasdasdadas"})
+        setError("email",{message:"すでに使われています"})
       }else{
         await addUser(data.email,data.password)
         login()
+        showToast("ユーザーを作成しました")
         navigate({
           to:"/"
         })
@@ -102,7 +106,7 @@ export const LoginForm = ({mode}:{mode:LoginFormMode}) => {
           <Button type="submit" data-level="first"  disabled={!isValid} >{mode === "login"?"ログイン":"サインアップ"}</Button>  
         </InputWrapper>
         {
-          mode === "login"?<Link to="/signup"></Link>:<Link to="/login">ログイン</Link>
+          mode === "login"?<Link to="/signup">サインアップ</Link>:<Link to="/login">ログイン</Link>
         }
       </form>
 

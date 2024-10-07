@@ -5,8 +5,9 @@ import { routeTree } from './routeTree.gen'
 import { useRecoilValue } from 'recoil';
 import { AuthSelector } from './states/auth';
 import useAuth from './hooks/useAuth';
+import useToast from './hooks/useToast';
 
-const router = createRouter({routeTree,context:{auth:undefined!,useAuthHook:undefined!}})
+const router = createRouter({routeTree,context:{auth:undefined!,useAuthHook:undefined!,useToastHook:undefined!}})
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -18,10 +19,11 @@ function App() {
 
   const auth =useRecoilValue(AuthSelector)
   const useAuthHook=useAuth()
+  const useToastHook=useToast()
 
   return (
     
-      <RouterProvider router={router} context={{auth,useAuthHook}}/>
+      <RouterProvider router={router} context={{auth,useAuthHook,useToastHook}}/>
       
       
       

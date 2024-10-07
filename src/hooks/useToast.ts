@@ -2,12 +2,12 @@
 import { ToastSelector, ToastState } from "../states/toast"
 import { useRecoilCallback } from "recoil"
 
-type Response ={
+export type UseToastResponse ={
     showToast:(message:string,duration?:number)=>void,
     showAlert:(message:string,duration?:number)=>void
 }
 
-const useToast= ():Response=>{
+const useToast= ():UseToastResponse=>{
 
     const showToast=useRecoilCallback(({set,reset})=>(message:string)=>{
         const newVal:ToastState={

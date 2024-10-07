@@ -73,7 +73,7 @@ export const Navigation = () => {
             {
                 naviPro.map((x) => {
                     return (
-                        <Li_Navigation>
+                        <Li_Navigation key={x.to}>
                             <Link to={x.to} activeProps={activateProps}>
                             {({isActive})=>{
 

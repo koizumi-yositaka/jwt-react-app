@@ -7,6 +7,7 @@ import { Layout } from '../components/layout/Layout'
 import { UseAuthResponse } from '../hooks/useAuth'
 import { Navigation } from '../components/layout/Navigation'
 import { HeaderA } from '../components/layout/HeaderA'
+import { UseToastResponse } from '../hooks/useToast'
 
 
 
@@ -37,6 +38,7 @@ export const Root = () => {
 type RouterContext = {
     auth:boolean,
     useAuthHook:UseAuthResponse,
+    useToastHook:UseToastResponse
 
 }
 

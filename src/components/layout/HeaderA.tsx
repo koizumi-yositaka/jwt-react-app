@@ -4,17 +4,22 @@ import { useNavigate } from "@tanstack/react-router"
 import useAuth from "../../hooks/useAuth"
 import { AuthSelector } from "../../states/auth"
 import { useRecoilValue } from "recoil"
+import useToast from "../../hooks/useToast"
 
 const Header_Wrapper=styled.div`
     width:100%;
     display: flex;
     justify-content:space-around;
 `
-
+const Div_Center=styled.div`
+display: flex;
+    align-items: center;
+`
 
 
 export const HeaderA = () => {
     const navigate = useNavigate()
+    const {showToast} = useToast()
      const isLogin = useRecoilValue(AuthSelector)
     const auth= useAuth()
     const logout = async()=>{
@@ -23,6 +28,7 @@ export const HeaderA = () => {
         navigate({
             to:"/login"
         })
+        showToast("ログアウトしました")
     }
     const toLogin=()=>{
         navigate({
@@ -31,14 +37,14 @@ export const HeaderA = () => {
     }
   return (
     <Header_Wrapper>
-        <div>{isLogin?"ログイン中":"ログインしてません"}</div>
-        <div >
+        <Div_Center>{isLogin?"ログイン中":"ログインしてません"}</Div_Center>
+        <Div_Center >
             
             {
                 isLogin ? <Button data-level="second" onClick={logout}>ログアウト</Button> 
                 :<Button data-level="first" onClick={toLogin}>ログイン</Button>
             } 
-        </div>
+        </Div_Center>
     </Header_Wrapper>
   )
 }
