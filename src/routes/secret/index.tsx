@@ -23,7 +23,7 @@ export const Secret = () => {
     }
   return (
     <>
-        <div>Secret</div>
+        <div>秘密</div>
         <Button data-level="first"  type="button" onClick={clickHandler}>dsdfs</Button>
     </>
   )

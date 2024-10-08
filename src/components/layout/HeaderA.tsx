@@ -12,8 +12,16 @@ const Header_Wrapper=styled.div`
     justify-content:space-around;
 `
 const Div_Center=styled.div`
-display: flex;
+    width:50%;
+    display: flex;
     align-items: center;
+    justify-content: center;
+`
+const Div_Right=styled.div`
+    width:50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 `
 
 
@@ -38,13 +46,13 @@ export const HeaderA = () => {
   return (
     <Header_Wrapper>
         <Div_Center>{isLogin?"ログイン中":"ログインしてません"}</Div_Center>
-        <Div_Center >
+        <Div_Right >
             
             {
                 isLogin ? <Button data-level="second" onClick={logout}>ログアウト</Button> 
                 :<Button data-level="first" onClick={toLogin}>ログイン</Button>
             } 
-        </Div_Center>
+        </Div_Right>
     </Header_Wrapper>
   )
 }

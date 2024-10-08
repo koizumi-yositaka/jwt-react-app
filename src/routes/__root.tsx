@@ -47,6 +47,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => (
     <Root></Root>
   ),
+  notFoundComponent:()=>{<h1>ssss</h1>},
   beforeLoad:async({context})=>{
     const useAuth =context.useAuthHook
     const isAuthed = context.auth

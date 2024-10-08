@@ -23,7 +23,7 @@ function App() {
 
   return (
     
-      <RouterProvider router={router} context={{auth,useAuthHook,useToastHook}}/>
+      <RouterProvider router={router} context={{auth,useAuthHook,useToastHook}} defaultNotFoundComponent={()=><h1>sdfs</h1>}/>
       
       
       

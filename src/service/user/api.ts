@@ -21,7 +21,8 @@ export const addUser=async(email:string,password:string)=>{
 
 type LoginResult = {
     loginResult:boolean,
-    message:string
+    message:string,
+    
 }
 export const loginAPi = async(email:string,password:string)=>{
     return (await axiosInstance.post<LoginResult>("users/login",{email,password},{ withCredentials: true })).data
