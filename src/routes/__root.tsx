@@ -57,7 +57,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
     localStorage.setItem("isReloaded","")
     try{
         if(!isAuthed && !isRedirect && isReloaded){
-            if(import.meta.env.VITE_MODE ==="pro") return
+            // if(import.meta.env.VITE_MODE ==="pro") return
             await helthCheck()
             useAuth.login()
         }
