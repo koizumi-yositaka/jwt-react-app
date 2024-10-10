@@ -12,6 +12,8 @@ env:
   IMAGE_NAME: koizumi-yositaka/jwt-react-app
 jobs:
   build-and-push-image:
+    outputs:
+      IMAGE_NAME: ${{steps.meta.outputs.tags}}
     permissions:
       actions: write
       checks: write
@@ -65,7 +67,7 @@ jobs:
       - name: Update files
         run: |
           cd manifest
-          yq -i "(.spec.template.spec.containers[] | select(.name==\"react-app\")).image=\"${{needs.build-and-push-image.outputs.IMAGE_NAME}}${{github.run_id}}\"" ./react/react-deployment.yml
+          yq -i "(.spec.template.spec.containers[] | select(.name==\"react-app\")).image=\"${{needs.build-and-push-image.outputs.IMAGE_NAME}}${{github.run_id}}\"" manifest/react/react-deployment.yml
           echo ${{needs.build-and-push-image.outputs.IMAGE_NAME}} >> README.md
 
       - name: Commit and push changes
