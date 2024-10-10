@@ -69,6 +69,7 @@ jobs:
         run: |
           pwd
           cd manifest
+          ls
           yq -i "(.spec.template.spec.containers[] | select(.name==\"react-app\")).image=\"${{needs.build-and-push-image.outputs.IMAGE_NAME}}${{github.run_id}}\"" manifest/react/react-deployment.yml
           echo ${{needs.build-and-push-image.outputs.IMAGE_NAME}} >> README.md
 
