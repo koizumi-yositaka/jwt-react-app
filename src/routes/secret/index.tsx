@@ -24,7 +24,7 @@ export const Secret = () => {
   return (
     <>
         <div>秘密</div>
-        <Button data-level="first"  type="button" onClick={clickHandler}>dsdfs</Button>
+        <Button data-level="first"  type="button" onClick={clickHandler}>記事の取得</Button>
     </>
   )
 }
