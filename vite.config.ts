@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import {TanStackRouterVite} from "@tanstack/router-vite-plugin"
 import dynamicImport from "vite-plugin-dynamic-import";
