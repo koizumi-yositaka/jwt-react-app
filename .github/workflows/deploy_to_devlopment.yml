@@ -5,7 +5,8 @@ on:
       - 'devlopment'
     paths: 
       - 'src/**'
-      - .github/workflows/deploy.yml
+      - .github/workflows/deploy_to_devlopment.yml
+      - .github/workflows/deploy_to_main.yml
 permissions:
   contents: read
   packages: write
