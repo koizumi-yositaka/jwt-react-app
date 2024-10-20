@@ -14,6 +14,17 @@ env:
   MANIFEST_REPO: koizumi-yositaka/jwt-tutorial-manifest
   IMAGE_NAME: koizumi-yositaka/jwt-react-app
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Show coverage
+        run: npm run test:coverage
   build-and-push-image:
     outputs:
       IMAGE_NAME: ${{steps.meta.outputs.tags}}
