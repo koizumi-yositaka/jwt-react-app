@@ -27,6 +27,7 @@ jobs:
       - name: Show coverage
         run: npm run test
   build-and-push-image:
+    needs: [test]
     outputs:
       IMAGE_NAME: ${{steps.meta.outputs.tags}}
     permissions:
