@@ -30,8 +30,7 @@ describe('Button Component', () => {
       render(<Button data-level="second" onClick={clickEvent}>{buttonLbl}</Button>);
       const btn = screen.getByRole('button', { name: buttonLbl});
       expect(btn).toBeInTheDocument();
-      // expect(btn).toHaveStyle({ backgroundColor: '#f24e3c' });
-      expect(btn).toHaveStyle({ backgroundColor: '#f24e4c' });
+      expect(btn).toHaveStyle({ backgroundColor: '#f24e3c' });
 
     });
     it('ボタンクリック時にイベントが実行される', () => {
