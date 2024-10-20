@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import { useRecoilValue } from 'recoil'
-import { ToastSelector } from '../../states/toast'
+import { ToastSelector, ToastState } from '../../states/toast'
 // フェードインのアニメーション
 const fadeIn = keyframes`
   from {
@@ -20,7 +20,7 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `;
-const Div_Toast = styled.div<{isVisble:boolean}>`
+const Div_Toast = styled.div<{isvisble:|"true"|"false"}>`
     position: fixed;
     top: 90vh;
     left: 3vw;
@@ -34,25 +34,30 @@ const Div_Toast = styled.div<{isVisble:boolean}>`
     color: black;
     background-color: #8293e7;
     font-size: 1em;
-    opacity: ${(props) => (props.isVisble ? 1 : 0)};
-    animation: ${(props) => (props.isVisble ? fadeIn : fadeOut)} 0.5s ease;
+    opacity: ${(props) => (props.isvisble ? 1 : 0)};
+    animation: ${(props) => (props.isvisble ? fadeIn : fadeOut)} 0.5s ease;
     transition: opacity 0.5s ease;
 `
 
-
-
-export const DemoToast = () => {
-    const toastState = useRecoilValue(ToastSelector)
+export const DemoToastComponent = ({toastState}:{toastState:ToastState}) =>{
     return (
-        
-
         toastState.isShow && (
-        <Div_Toast isVisble={toastState.isShow}>
+        <Div_Toast isvisble={toastState.isShow?"true":"false"}>
             <p>{toastState?.message}</p>
         </Div_Toast>
     
         )
         
     )
+}
+
+
+
+export const DemoToast = () => {
+    const toastState = useRecoilValue(ToastSelector)
+    return (
+      <DemoToastComponent toastState={toastState}></DemoToastComponent>
+    )
+
 }
 
