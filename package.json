@@ -10,13 +10,15 @@
     "start": "npm run dev:client",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.55.2",
     "@tanstack/react-router": "^1.62.0",
     "@tanstack/router-vite-plugin": "^1.62.0",
+    "@types/jest": "^29.5.13",
     "@types/react-modal": "^3.16.3",
     "@types/recoil": "^0.0.1",
     "axios": "^1.7.7",
@@ -29,20 +31,31 @@
     "react-modal": "^3.16.1",
     "recoil": "^0.7.7",
     "styled-components": "^6.1.13",
+    "vite-plugin-dynamic-import": "^1.6.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.2",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/svelte": "^5.2.4",
+    "@types/node": "^22.7.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@types/testing-library__jest-dom": "^5.14.9",
+    "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.0.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "happy-dom": "^15.7.4",
+    "jsdom": "^25.0.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vitest": "^2.1.3"
   }
 }

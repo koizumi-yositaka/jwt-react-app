@@ -1,11 +1,12 @@
-name: deploy to development
+name: deploy to devlopment
 on:
   push:
     branches:
       - 'dev'
     paths: 
       - 'src/**'
-      - .github/workflows/deploy.yml
+      - .github/workflows/deploy_to_devlopment.yml
+      - .github/workflows/deploy_to_main.yml
 permissions:
   contents: read
   packages: write
@@ -14,7 +15,19 @@ env:
   MANIFEST_REPO: koizumi-yositaka/jwt-tutorial-manifest
   IMAGE_NAME: koizumi-yositaka/jwt-react-app
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Show coverage
+        run: npm run test
   build-and-push-image:
+    needs: [test]
     outputs:
       IMAGE_NAME: ${{steps.meta.outputs.tags}}
     permissions:
