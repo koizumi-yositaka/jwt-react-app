@@ -1,8 +1,8 @@
-name: deploy to devlopment
+name: deploy to development
 on:
   push:
     branches:
-      - 'devlopment'
+      - 'dev'
     paths: 
       - 'src/**'
       - .github/workflows/deploy.yml
