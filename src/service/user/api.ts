@@ -31,6 +31,15 @@ export const logoutAPi = async()=>{
     return (await axiosInstance.post("users/logout",{ withCredentials: true })).data
 }
 
+
+export const getAddress=async({lat,lon}:{lat:number,lon:number})=>{
+    return (await axiosInstance.get<{address:string}>("location/reverseGeoCoder",{
+        params:{
+            lat,
+            lon
+        }
+    })).data.address
+}
 export const helthCheck = async()=>{
     return (await axiosInstance.get("/health",{ withCredentials: true })).data
 }
