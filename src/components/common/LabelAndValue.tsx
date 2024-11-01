@@ -29,7 +29,6 @@ const Value = styled.span`
     font-weight: bold;
 `;
 
-// LabelValueDisplayコンポーネント
 const LabelValueDisplay: React.FC<LabelValueDisplayProps> = ({ label, value }) => {
     return (
         <Container>
