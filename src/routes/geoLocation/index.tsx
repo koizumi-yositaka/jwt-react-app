@@ -32,7 +32,7 @@ export const GeoLocation = () => {
             
             <>
                 {
-                    !location.address && <Button data-level='first' onClick={clickHandler}>ここはどこ</Button>
+                    !location.address && <Button data-level='first' onClick={clickHandler}>ここはどこ?</Button>
                 }
                 <LabelValueDisplay label='緯度' value={location.latitude??""}></LabelValueDisplay>
                 <LabelValueDisplay label='経度' value={location.longitude??""}></LabelValueDisplay>
