@@ -2,7 +2,7 @@ import { useRecoilCallback } from "recoil"
 import { AuthState } from "../states/auth"
 import { logoutAPi } from "../service/user/api"
 
-export type UseAuthResponse = {
+export interface UseAuthResponse {
     login:()=>void,
     logout:()=>void,
 

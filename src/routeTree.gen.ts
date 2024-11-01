@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as SecretIndexImport } from './routes/secret/index'
+import { Route as GeoLocationIndexImport } from './routes/geoLocation/index'
 import { Route as CommonSignupImport } from './routes/_common/signup'
 import { Route as CommonLoginImport } from './routes/_common/login'
 import { Route as CommonDescriptionImport } from './routes/_common/description'
@@ -26,6 +27,11 @@ const IndexRoute = IndexImport.update({
 
 const SecretIndexRoute = SecretIndexImport.update({
   path: '/secret/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GeoLocationIndexRoute = GeoLocationIndexImport.update({
+  path: '/geoLocation/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -76,6 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommonSignupImport
       parentRoute: typeof rootRoute
     }
+    '/geoLocation/': {
+      id: '/geoLocation/'
+      path: '/geoLocation'
+      fullPath: '/geoLocation'
+      preLoaderRoute: typeof GeoLocationIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/secret/': {
       id: '/secret/'
       path: '/secret'
@@ -93,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/description': typeof CommonDescriptionRoute
   '/login': typeof CommonLoginRoute
   '/signup': typeof CommonSignupRoute
+  '/geoLocation': typeof GeoLocationIndexRoute
   '/secret': typeof SecretIndexRoute
 }
 
@@ -101,6 +115,7 @@ export interface FileRoutesByTo {
   '/description': typeof CommonDescriptionRoute
   '/login': typeof CommonLoginRoute
   '/signup': typeof CommonSignupRoute
+  '/geoLocation': typeof GeoLocationIndexRoute
   '/secret': typeof SecretIndexRoute
 }
 
@@ -110,20 +125,28 @@ export interface FileRoutesById {
   '/_common/description': typeof CommonDescriptionRoute
   '/_common/login': typeof CommonLoginRoute
   '/_common/signup': typeof CommonSignupRoute
+  '/geoLocation/': typeof GeoLocationIndexRoute
   '/secret/': typeof SecretIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/description' | '/login' | '/signup' | '/secret'
+  fullPaths:
+    | '/'
+    | '/description'
+    | '/login'
+    | '/signup'
+    | '/geoLocation'
+    | '/secret'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/description' | '/login' | '/signup' | '/secret'
+  to: '/' | '/description' | '/login' | '/signup' | '/geoLocation' | '/secret'
   id:
     | '__root__'
     | '/'
     | '/_common/description'
     | '/_common/login'
     | '/_common/signup'
+    | '/geoLocation/'
     | '/secret/'
   fileRoutesById: FileRoutesById
 }
@@ -133,6 +156,7 @@ export interface RootRouteChildren {
   CommonDescriptionRoute: typeof CommonDescriptionRoute
   CommonLoginRoute: typeof CommonLoginRoute
   CommonSignupRoute: typeof CommonSignupRoute
+  GeoLocationIndexRoute: typeof GeoLocationIndexRoute
   SecretIndexRoute: typeof SecretIndexRoute
 }
 
@@ -141,6 +165,7 @@ const rootRouteChildren: RootRouteChildren = {
   CommonDescriptionRoute: CommonDescriptionRoute,
   CommonLoginRoute: CommonLoginRoute,
   CommonSignupRoute: CommonSignupRoute,
+  GeoLocationIndexRoute: GeoLocationIndexRoute,
   SecretIndexRoute: SecretIndexRoute,
 }
 
@@ -160,6 +185,7 @@ export const routeTree = rootRoute
         "/_common/description",
         "/_common/login",
         "/_common/signup",
+        "/geoLocation/",
         "/secret/"
       ]
     },
@@ -174,6 +200,9 @@ export const routeTree = rootRoute
     },
     "/_common/signup": {
       "filePath": "_common/signup.tsx"
+    },
+    "/geoLocation/": {
+      "filePath": "geoLocation/index.tsx"
     },
     "/secret/": {
       "filePath": "secret/index.tsx"

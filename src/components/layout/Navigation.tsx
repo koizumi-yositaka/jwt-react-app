@@ -63,6 +63,10 @@ export const Navigation = () => {
         {
             to:"/secret",
             label:"秘密"
+        },
+        {
+            to:"/geoLocation",
+            label:"位置"
         }
     ]
 
