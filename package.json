@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "npm run dev:client",
     "dev:client": "vite --port 3003",
+    "dev:https": "vite --port 13031 & local-ssl-proxy --key ./cert/localhost-key.pem --cert ./cert/localhost.pem --source 3031 --target 13031",
     "dev:api": "npx json-server --watch ./src/db/db.json -p 4040",
-    "start": "npm run dev:client",
+    "start": "npm run dev:https",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

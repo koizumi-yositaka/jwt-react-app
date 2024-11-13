@@ -19,5 +19,5 @@ export default defineConfig({
     environment: "happy-dom",
     // テスト全体で使用するライブラリをvitest-setup.jsに記載し、インポートする設定
     setupFiles: [resolve(__dirname, "src", "vitest-setup.js")],
-  },
+  }
 });

@@ -5,8 +5,6 @@ const axiosInstance = axios.create({baseURL:BASE_URL+"hoge"})
 
 
 export const checkSecret=async()=>{
-    console.log("baseutl",BASE_URL)
-    //return (await axiosInstance.get<User[]>(`users/${email}`)).data
     return (await axiosInstance.get(`/`,{ withCredentials: true })).data
 
 }

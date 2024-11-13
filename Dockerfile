@@ -8,6 +8,8 @@ RUN npm run build
 FROM nginx:1.21.5 as production-stage
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./cert/localhost-key.pem /etc/nginx/conf.d/localhost-key.pem
+COPY ./cert/localhost.pem /etc/nginx/conf.d/localhost.pem
 COPY --from=build-stage /app/dist /var/www
 EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
